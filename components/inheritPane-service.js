@@ -27,7 +27,9 @@
  * ***** END LICENSE BLOCK *****
  */
 
-Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+//Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+var { XPCOMUtils } = ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
+
 const catMan = Components.classes["@mozilla.org/categorymanager;1"]
                          .getService(Components.interfaces.nsICategoryManager);
 
@@ -45,7 +47,7 @@ inheritPane.prototype = {
      *  InheritedPropertiesGrid, the hidefor values are stored in the category
      *  manager as part of the property object.
      */
-     Components.utils.import("resource://" + this.chromePackageName + "/inheritedPropertiesGrid.jsm");
+    var {InheritedPropertiesGrid} = ChromeUtils.import("resource://" + this.chromePackageName + "/inheritedPropertiesGrid.jsm");
      let catEnum = catMan.enumerateCategory("InheritedPropertiesGrid");
      let type = server.type;
      let show = false; // have we found a non-hidden entry?

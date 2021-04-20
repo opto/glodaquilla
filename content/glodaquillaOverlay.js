@@ -26,6 +26,7 @@
  *
  * ***** END LICENSE BLOCK *****
  */
+var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 (function glodaquilla()
 {
@@ -37,19 +38,44 @@
   const Ci = Components.interfaces;
   const Cu = Components.utils;
 
-  Cu.import("resource:///modules/iteratorUtils.jsm");
-  Cu.import("resource:///modules/gloda/gloda.js");
-  Cu.import("resource:///modules/gloda/datastore.js");
-  Cu.import("resource:///modules/gloda/datamodel.js");
-  Cu.import("resource:///modules/gloda/indexer.js");
-  Cu.import("resource:///modules/gloda/index_msg.js");
-  Cu.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
+//  Cu.import("resource:///modules/iteratorUtils.jsm");
+  var { fixIterator, toXPCOMArray } = ChromeUtils.import("resource:///modules/iteratorUtils.jsm");
+//  Cu.import("resource:///modules/gloda/gloda.js");
+  var { Gloda } = 
+  ChromeUtils.import("resource:///modules/gloda/GlodaPublic.jsm");
+  
+//    Cu.import("resource:///modules/gloda/datastore.js");
+    var { GlodaDatastore } = ChromeUtils.import(
+      "resource:///modules/gloda/GlodaDatastore.jsm"
+    );
+ //     Cu.import("resource:///modules/gloda/datamodel.js");
+      var {  GlodaAttributeDBDef,
+        GlodaAccount,
+        GlodaConversation,
+        GlodaFolder,
+        GlodaMessage,
+        GlodaContact,
+        GlodaIdentity,
+        GlodaAttachment } = ChromeUtils.import(
+        "resource:///modules/gloda/GlodaDataModel.jsm"
+      );
+      //  Cu.import("resource:///modules/gloda/indexer.js");
+  var { GlodaIndexer } = ChromeUtils.import(
+    "resource:///modules/gloda/GlodaIndexer.jsm"
+  );
+ // Cu.import("resource:///modules/gloda/index_msg.js");
+  var { GlodaMsgIndexer } = ChromeUtils.import(
+    "resource:///modules/gloda/IndexMsg.jsm"
+  );
+  var {InheritedPropertiesGrid} = ChromeUtils.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
 
   // module-level variables
-  const glodaquillaStrings = Cc["@mozilla.org/intl/stringbundle;1"]
-                             .getService(Ci.nsIStringBundleService)
-                             .createBundle("chrome://glodaquilla/locale/glodaquilla.properties");
-  let installedVersion = "unknown";
+  //const glodaquillaStrings = Cc["@mozilla.org/intl/stringbundle;1"]
+  //                           .getService(Ci.nsIStringBundleService)
+  //                           .createBundle("chrome://glodaquilla/locale/glodaquilla.properties");
+  
+  const glodaquillaStrings = Services.strings.createBundle("chrome://glodaquilla/locale/glodaquilla.properties");
+                             let installedVersion = "unknown";
   let rootprefs = Cc["@mozilla.org/preferences-service;1"]
                      .getService(Ci.nsIPrefService)
                      .getBranch("");
@@ -414,7 +440,7 @@
      *  synchronize the new folder indexing controls with those of GlodaQuilla. When
      *  installation of this is detected, display a page that gives migration instructions.
      */
-    installedTbVersion = rootprefs.getCharPref("extensions.glodaquilla.installedTbVersion");
+    installedTbVersion = rootprefs.getStringPref("extensions.glodaquilla.installedTbVersion");
     if (installedTbVersion != "3.1")
     {
       // See if this is really 3.1 with the new support for indexingPriority
@@ -450,7 +476,7 @@
           //  don't enable it.
           rootprefs.setBoolPref(self.PREF_EnableInheritedProps, false);
         self.syncProperties(true);
-        rootprefs.setCharPref("extensions.glodaquilla.installedTbVersion", "3.1");
+        rootprefs.setStringPref("extensions.glodaquilla.installedTbVersion", "3.1");
       }
     }
   };

@@ -45,7 +45,8 @@
   const Cu = Components.utils;
   
   // module-level variables
-  Cu.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
+//  Cu.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
+  var {InheritedPropertiesGrid} = ChromeUtils.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
 
   let folder; // nsIMsgFolder passed to the window
 
@@ -104,9 +105,24 @@
     if (glodaDoIndex == oldValue)
       return;
 
-    Cu.import("resource:///modules/gloda/datastore.js");
-    Cu.import("resource:///modules/gloda/datamodel.js");
-    Cu.import("resource:///modules/gloda/gloda.js");
+//    Cu.import("resource:///modules/gloda/datastore.js");
+    var { GlodaDatastore } = ChromeUtils.import(
+      "resource:///modules/gloda/GlodaDatastore.jsm"
+    );
+//     Cu.import("resource:///modules/gloda/datamodel.js");
+     var {  GlodaAttributeDBDef,
+      GlodaAccount,
+      GlodaConversation,
+      GlodaFolder,
+      GlodaMessage,
+      GlodaContact,
+      GlodaIdentity,
+      GlodaAttachment } = ChromeUtils.import(
+      "resource:///modules/gloda/GlodaDataModel.jsm"
+    );
+//  Cu.import("resource:///modules/gloda/gloda.js");
+  var { Gloda } = 
+  ChromeUtils.import("resource:///modules/gloda/GlodaPublic.jsm");
 
      // there is nothing to sync on TB 3.0
     if (typeof GlodaDatastore.getDefaultIndexingPriority == "undefined")
