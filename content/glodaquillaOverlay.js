@@ -131,7 +131,7 @@
     });
 
     let prefs = Cc["@mozilla.org/preferences-service;1"]
-                  .getService(Ci.nsIPrefBranch2);
+                  .getService(Ci.nsIPrefBranch);
     prefs.addObserver(self.PREF_EnableInheritedProps, self, false);
 
     self.updateVersion();
@@ -140,7 +140,7 @@
   self.onUnload = function onUnload(e)
   {
     let prefs = Cc["@mozilla.org/preferences-service;1"]
-                  .getService(Ci.nsIPrefBranch2);
+                  .getService(Ci.nsIPrefBranch);
     prefs.removeObserver(self.PREF_EnableInheritedProps, self);
   };
 
@@ -205,10 +205,7 @@
     for  (var server of  fixIterator(servers, Ci.nsIMsgIncomingServer))
     {
       let rootFolder = server.rootFolder;
-      let allFolders = Cc["@mozilla.org/supports-array;1"]
-                         .createInstance(Ci.nsISupportsArray);
-      rootFolder.ListDescendents(allFolders);
-      let numFolders = allFolders.Count();
+      let allFolders = rootFolder.descendants;
       for  (let folder of  fixIterator(allFolders, Ci.nsIMsgFolder))
       {
         let glodaFolder  = GlodaDatastore._mapFolder(folder);
@@ -435,9 +432,7 @@
         for  (var server of fixIterator(servers, Ci.nsIMsgIncomingServer))
         {
           let rootFolder = server.rootFolder;
-          let allFolders = Cc["@mozilla.org/supports-array;1"]
-                             .createInstance(Ci.nsISupportsArray);
-          rootFolder.ListDescendents(allFolders);
+          let allFolders = rootFolder.descendants;
           for  (let folder of fixIterator(allFolders, Ci.nsIMsgFolder))
           {
             let glodaDoIndex = folder.getInheritedStringProperty("glodaDoIndex");

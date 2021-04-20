@@ -62,7 +62,7 @@ inheritPane.prototype = {
 
   QueryInterface: XPCOMUtils.generateQI([Components.interfaces.nsIMsgAccountManagerExtension]),
   classDescription: "MesQuilla Inherit Pane Service",
-  classID: Components.ID("{f2809396-1cd1-12b2-841b-8e15f007c699}"),
+  classID: Components.ID("{deb0918a-0652-4a5b-9f48-a6e713cf1803}"),
   contractID: "@mozilla.org/accountmanager/extension;1?name=inheritPane",
 
   _xpcom_categories: [{category: "mailnews-accountmanager-extensions",

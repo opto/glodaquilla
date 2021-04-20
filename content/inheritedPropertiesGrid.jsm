@@ -39,23 +39,9 @@ const Cu = Components.utils;
 const catMan = Cc["@mozilla.org/categorymanager;1"]
                  .getService(Ci.nsICategoryManager);
 
-// we don't seem to have Application in a module :(
-var Application = null;
 
-// Thunderbird version
-try {
-  Application = Cc["@mozilla.org/steel/application;1"]
-                  .getService(Ci.extIApplication);
-} catch (e) {}
-
-// SeaMonkey version
-if (!Application)
-{
-  try {
-    Application = Cc["@mozilla.org/smile/application;1"]
-                    .getService(Ci.extIApplication);
-  } catch (e) {}
-}
+// Former shared inherited properties, now only saved per app
+let mesquillaInheritedProperties = {};
 
 var InheritedPropertiesGrid = {
 
@@ -89,9 +75,9 @@ var InheritedPropertiesGrid = {
                             false /* aPersist */,
                             true /* aReplace */);
     // new method, saving in a global context
-    let inheritedProperties = Application.storage.get("mesquillaInheritedProperties", {});
+    let inheritedProperties = mesquillaInheritedProperties;
     inheritedProperties[aPropertyObject.property] = aPropertyObject;
-    Application.storage.set("mesquillaInheritedProperties", inheritedProperties);
+    mesquillaInheritedProperties = inheritedProperties;
     return;
   },
 
@@ -111,9 +97,9 @@ var InheritedPropertiesGrid = {
                                aPropertyObject.property,
                                false /* aPersist */);
     // new method, saving in a global context
-    let inheritedProperties = Application.storage.get("mesquillaInheritedProperties", {});
+    let inheritedProperties = mesquillaInheritedProperties;
     inheritedProperties[aPropertyObject.property] = null;
-    Application.storage.set("mesquillaInheritedProperties", inheritedProperties);
+    mesquillaInheritedProperties = inheritedProperties;
     return;
   },
 
@@ -122,7 +108,7 @@ var InheritedPropertiesGrid = {
   {
     // new method: shared global context
     try {
-      let inheritedProperties = Application.storage.get("mesquillaInheritedProperties", {});
+      let inheritedProperties = mesquillaInheritedProperties;
       let property = inheritedProperties[aProperty];
       if (typeof property != 'undefined')
         return property;
