@@ -14,10 +14,8 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 //var { manage_emails } = ChromeUtils.import("chrome://nostalgy/content/manage_emails.jsm");
 
-Services.scriptloader.loadSubScript("chrome://glodaquilla/content/glodaquillaOverlay.js", window, "UTF-8");
-//Services.scriptloader.loadSubScript("chrome://glodaquilla/content/am-inheritPane.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://glodaquilla/content/inheritPane-service.js", window, "UTF-8");
-//Services.scriptloader.loadSubScript("chrome://FolderPaneSwitcher/content/FolderPaneSwitcher.js", window, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://glodaquilla/content/folderPropsOverlay.js", window, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://glodaquilla/content/am-inheritPane.js", window, "UTF-8");
 /*
 
 
@@ -34,12 +32,12 @@ Services.scriptloader.loadSubScript("chrome://nostalgy/content/edit_prefs.js", w
 */
 
 function onLoad(activatedWhileWindowOpen) {
-    console.log("glodaquilla", Services.appinfo.version);
+    console.log("glodaquilla-folderPropsOverlay", Services.appinfo.version);
     /*
        let layout = WL.injectCSS("chrome://quickfolders/content/quickfolders-layout.css");
        layout.setAttribute("title", "QuickFolderStyles");
        
-    */
+  
 
     WL.injectElements(`
 
@@ -49,25 +47,27 @@ function onLoad(activatedWhileWindowOpen) {
       <treecol id="colOffline" persist="hidden ordinal"
              tooltiptext="&colOffline.tooltiptext;"
              label="onDisk" fixed="true"
-             class="treecol-image" src="chrome://glodaquilla/content/skin/good.png" />
+             class="treecol-image" src="chrome://glodaquilla/skin/good.png" />
       <splitter class="tree-splitter" />
       <treecol id="colGlodaId" persist="hidden ordinal width"
              tooltiptext="&colGlodaId.tooltiptext;"
              label="gloda id"
-             class="treecol-image" src="chrome://glodaquilla/content/skin/number.png"/>
+             class="treecol-image" src="chrome://glodaquilla/skin/number.png"/>
       <splitter class="tree-splitter" />
       <treecol id="colGlodaDirty" persist="hidden ordinal width"
              tooltiptext="&colGlodaDirty.tooltiptext;"
              label="gloda dirty"
-             class="treecol-image" src="chrome://glodaquilla/content/skin/questions.png"/>
+             class="treecol-image" src="chrome://glodaquilla/skin/questions.png"/>
     </treecols>
   </tree>
   `, ["chrome://glodaquilla/locale/glodaquilla.dtd"]);
-
-    console.log("messenger-FPS");
+  */
+ //   console.log("  */-FPS");
     //window.onNostalgyLoad();
 //    window.FolderPaneSwitcher.onLoad();
-window.glodaquilla.onLoad();
+window.glodaquillaFolderProps.onLoad();
+
+//glodaquilla.onLoad();
     //manage_emails.WL = WL;
     /*   
     */
@@ -76,7 +76,7 @@ window.glodaquilla.onLoad();
 function onUnload(isAddOnShutDown) {
     console.log("glodaquilla unload");
     //    window.onNostalgyUnload();
-    window.glodaquilla.onUnload();
+//    window.glodaquilla.onUnload();
         Components.classes["@mozilla.org/xre/app-info;1"].
         getService(Components.interfaces.nsIXULRuntime).invalidateCachesOnRestart();
 }

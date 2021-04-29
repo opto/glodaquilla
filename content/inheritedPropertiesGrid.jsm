@@ -176,7 +176,7 @@ var InheritedPropertiesGrid = {
                       .createBundle("chrome://glodaquilla/locale/am-inheritPane.properties");
 
     // create new vbox
-    let inheritBox = document.createElement("vbox");
+    let inheritBox = document.createXULElement("vbox");
     inheritBox.setAttribute("id", "inheritBox");
 
     // now append into the existing xul
@@ -190,40 +190,40 @@ var InheritedPropertiesGrid = {
     }
 
     // create the grid and its children
-    let grid = document.createElement("grid");
-    let columns = document.createElement("columns");
+    let grid = document.createXULElement("grid");
+    let columns = document.createXULElement("columns");
     grid.appendChild(columns);
 
     // add three columns
-    let nameColumn = document.createElement("column");
+    let nameColumn = document.createXULElement("column");
     columns.appendChild(nameColumn);
 
-    let enabledColumn = document.createElement("column");
+    let enabledColumn = document.createXULElement("column");
     columns.appendChild(enabledColumn);
 
-    let inheritColumn = document.createElement("column");
+    let inheritColumn = document.createXULElement("column");
     columns.appendChild(inheritColumn);
  
-    let flexColumn = document.createElement("column");
+    let flexColumn = document.createXULElement("column");
     flexColumn.setAttribute("flex", "1");
     grid.appendChild(flexColumn);
 
-    rows = document.createElement("rows");
+    rows = document.createXULElement("rows");
     rows.setAttribute("id", "inheritRows");
     grid.appendChild(rows);
 
     // add column headers as the first row
-    let row = document.createElement("row");
+    let row = document.createXULElement("row");
 
-    let label1 = document.createElement("label");
+    let label1 = document.createXULElement("label");
     label1.setAttribute("value", " ");
     row.appendChild(label1);
 
-    let label2 = document.createElement("label");
+    let label2 = document.createXULElement("label");
     label2.setAttribute("value", strings.GetStringFromName("enabled"));
     row.appendChild(label2);
 
-    let label3 = document.createElement("label");
+    let label3 = document.createXULElement("label");
     label3.setAttribute("value", strings.GetStringFromName("inherit"));
     row.appendChild(label3);
 
@@ -281,32 +281,33 @@ var InheritedPropertiesGrid = {
     let row = document.getElementById("property-" + property);
     if (row)
       row.parentNode.removeChild(row);
-    row = document.createElement("row");
+    row = document.createXULElement("row");
     row.setAttribute("id", "property-" + property);
     if (aIsAccountManager && propertyObject.hidefor)
       row.setAttribute("hidefor", propertyObject.hidefor);
 
-    let label = document.createElement("label");
+    let label = document.createXULElement("label");
     label.setAttribute("value", propertyObject.name);
     label.setAttribute("accesskey", propertyObject.accesskey);
     label.setAttribute("control", "inherit-" + property);
     row.appendChild(label);
 
-    let enableHbox = document.createElement("hbox");
+    let enableHbox = document.createXULElement("hbox");
     enableHbox.setAttribute("pack", "center");
-    let enableCheckbox = document.createElement("checkbox");
+    let enableCheckbox = document.createXULElement("checkbox");
     enableCheckbox.setAttribute("id", "enable-" + property);
     // We only use this in the account manager
-    if (aIsAccountManager)
+//    if (aIsAccountManager)
+if (true)
       enableCheckbox.setAttribute("oncommand",
         "InheritedPropertiesGrid.onCommandEnable('" + property + 
         "' ,gInheritTarget, document);");
     enableHbox.appendChild(enableCheckbox);
     row.appendChild(enableHbox);
 
-    let inheritHbox = document.createElement("hbox");
+    let inheritHbox = document.createXULElement("hbox");
     inheritHbox.setAttribute("pack", "center");
-    let inheritCheckbox = document.createElement("checkbox");
+    let inheritCheckbox = document.createXULElement("checkbox");
     inheritCheckbox.setAttribute("id", "inherit-" + property);
     inheritCheckbox.setAttribute("oncommand",
       "InheritedPropertiesGrid.onCommandInherit('" + property + 
@@ -316,7 +317,8 @@ var InheritedPropertiesGrid = {
 
     // The account manager gives special treatment to an element of type
     //  "text", which is the treatment that we want.
-    let text = document.createElement("text");
+
+    let text = document.createXULElement("label"); //!was text
     text.setAttribute("id", "server." + property);
     text.setAttribute("hidden", "true");
     if (aIsAccountManager)
@@ -327,7 +329,7 @@ var InheritedPropertiesGrid = {
       text.setAttribute("genericattr", "true");
     }
     row.appendChild(text);
-
+/*!!!*/
     // set the values of the checkboxes
     // It's not trivial to figure out if a server property is inherited or not.
     // I need to call the underlying server preference to see :( Easier to
@@ -351,7 +353,7 @@ var InheritedPropertiesGrid = {
         var rootprefs = Cc["@mozilla.org/preferences-service;1"]
                           .getService(Ci.nsIPrefService)
                           .getBranch("");
-        globalValue = rootprefs.getCharPref(globalProperty);
+        globalValue = rootprefs.getStringPref(globalProperty);
       }
       catch (e) {}
       isInherited = (inheritedValue == globalValue);
@@ -380,7 +382,9 @@ var InheritedPropertiesGrid = {
   } catch (e) {Cu.reportError(e);}},
 
   onCommandInherit: function onCommandInherit(property, aFolder, document)
-  { try {
+  { 
+    debugger;
+    try {
 
     // find the property object
     let propertyObject = this.getPropertyObject(property);
@@ -423,7 +427,10 @@ var InheritedPropertiesGrid = {
 
   // this function is only used in the account manager.
   onCommandEnable: function onCommandEnable(property, aFolder, document)
-  { try {
+  {
+        debugger;
+
+ try {
 
     let elementEnable = document.getElementById("enable-" + property);
     let isEnabledString = elementEnable.checked ? "true" : "false";

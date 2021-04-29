@@ -42,7 +42,7 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
   var { fixIterator, toXPCOMArray } = ChromeUtils.import("resource:///modules/iteratorUtils.jsm");
 //  Cu.import("resource:///modules/gloda/gloda.js");
   var { Gloda } = 
-  ChromeUtils.import("resource:///modules/gloda/GlodaPublic.jsm");
+  ChromeUtils.import("resource:///modules/gloda/Gloda.jsm");
   
 //    Cu.import("resource:///modules/gloda/datastore.js");
     var { GlodaDatastore } = ChromeUtils.import(
@@ -356,9 +356,9 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
       var kMsgFlagOffline = 0x0080;
       var isOffline = hdr.flags & kMsgFlagOffline;
       if (!isOffline && hdr.folder.flags & 0x00002001)
-        return "chrome://glodaquilla/skin/unclassified.png";
+        return "chrome://glodaquilla/content/skin/unclassified.png";
       else
-        return "chrome://glodaquilla/skin/good.png";
+        return "chrome://glodaquilla/content/skin/good.png";
     },
     getSortLongForRow:   function(hdr) { return null;},
     getRowProperties:    function(index, properties) {return null;},
@@ -469,8 +469,8 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
             }
           }
         }
-        if (showMigration)
-          self.openContentTab('http://mesquilla.com/extensions/glodaquilla/glodaquilla-update-for-thunderbird-3-1/');
+        if (showMigration)  ;
+ //! does not exist         self.openContentTab('http://mesquilla.com/extensions/glodaquilla/glodaquilla-update-for-thunderbird-3-1/');
         else
           // If the user has not previously used GlodaQuilla's indexing suppression, then
           //  don't enable it.

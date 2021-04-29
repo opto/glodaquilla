@@ -52,7 +52,7 @@ messenger.tabs.onActivated.addListener(async (activeInfo) => {
 */
 
 async function main() {
-//  messenger.WindowListener.registerDefaultPrefs("chrome/content/scripts/fp-prefs.js");
+messenger.WindowListener.registerDefaultPrefs("defaults/preferences/glodaquilla.js");
 
 
   messenger.WindowListener.registerChromeUrl([
@@ -90,7 +90,7 @@ async function main() {
   //attention: each target window (like messenger.xul) can appear only once
   // this is different from chrome.manifest
   // xhtml for Tb78
-  // messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "chrome/content/scripts/qf-messenger.js");
+   messenger.WindowListener.registerWindow("chrome://messenger/content/folderProps.xhtml", "content/scripts/gl-folderprops.js");
 
   //   messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xul", "chrome/content/scripts/me-messenger.js");
  // messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "chrome/content/scripts/fp-messenger.js");

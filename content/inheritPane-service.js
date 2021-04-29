@@ -35,6 +35,10 @@ const catMan = Components.classes["@mozilla.org/categorymanager;1"]
 
 var { manage_glodaquilla } = ChromeUtils.import("chrome://glodaquilla/content/manage_glodaquilla.jsm");
 
+catMan.addCategoryEntry('mailnews-accountmanager-extensions',
+'mesquilla extension inherit pane',
+"@mozilla.org/accountmanager/extension;1?name=inheritPane",
+  false, true);
 
 
 function inheritPane() {
@@ -51,10 +55,13 @@ inheritPane.prototype = {
      *  InheritedPropertiesGrid, the hidefor values are stored in the category
      *  manager as part of the property object.
      */
-    var {InheritedPropertiesGrid} = ChromeUtils.import("resource://" + this.chromePackageName + "/inheritedPropertiesGrid.jsm");
-     let catEnum = catMan.enumerateCategory("InheritedPropertiesGrid");
+    debugger;
+     console.log("showpanel");
+    var { InheritedPropertiesGrid } = ChromeUtils.import("resource://" + this.chromePackageName + "/inheritedPropertiesGrid.jsm");
+let catEnum = catMan.enumerateCategory("InheritedPropertiesGrid");
      let type = server.type;
      let show = false; // have we found a non-hidden entry?
+
      while (!show && catEnum.hasMoreElements()) {
        let entry = catEnum.getNext()
                           .QueryInterface(Components.interfaces.nsISupportsCString)
@@ -63,16 +70,22 @@ inheritPane.prototype = {
        if (propertyObject.hidefor.indexOf(type) == -1) // then we should show this entry
          show = true;
      }
-    return show;
+ 
+
+   return show;
   },
 
-  QueryInterface: XPCOMUtils.generateQI([Components.interfaces.nsIMsgAccountManagerExtension]),
+  QueryInterface: ChromeUtils.generateQI(["nsIMsgAccountManagerExtension" ]), 
+ // QueryInterface: ChromeUtils.generateQI([ Components.interfaces.nsIMsgAccountManagerExtension ]), 
+  
+  //XPCOMUtils.generateQI([Components.interfaces.nsIMsgAccountManagerExtension]),
   classDescription: "MesQuilla Inherit Pane Service",
   classID: Components.ID("{deb0918a-0652-4a5b-9f48-a6e713cf1803}"),
   contractID: "@mozilla.org/accountmanager/extension;1?name=inheritPane",
+  //category: {'mailnews-accountmanager-extensions': 'mesquilla extension inherit pane'},
 
-  _xpcom_categories: [{category: "mailnews-accountmanager-extensions",
-                       entry: "mesquilla extension inherit pane"}]
+//  _xpcom_categories: [{category: "mailnews-accountmanager-extensions",
+ //                      entry: "mesquilla extension inherit pane"}]
 };
 
 

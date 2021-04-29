@@ -40,7 +40,7 @@
       <treecol id="colOffline" persist="hidden ordinal"
              tooltiptext="&colOffline.tooltiptext;"
              label="onDisk" fixed="true"
-             class="treecol-image" src="chrome://glodaquilla/skin/good.png" />
+             class="treecol-image" src="chrome://glodaquilla/content/skin/good.png" />
       <splitter class="tree-splitter" />
       <treecol id="colGlodaId" persist="hidden ordinal width"
              tooltiptext="&colGlodaId.tooltiptext;"

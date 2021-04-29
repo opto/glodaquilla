@@ -46,7 +46,7 @@
   
   // module-level variables
 //  Cu.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
-  var {InheritedPropertiesGrid} = ChromeUtils.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
+  var { InheritedPropertiesGrid } = ChromeUtils.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
 
   let folder; // nsIMsgFolder passed to the window
 
@@ -59,14 +59,15 @@
     try {
       enableInheritedProps = prefs.getBoolPref("extensions.glodaquilla.enableInheritedProps");
     } catch (e) {}
-
+    enableInheritedProps = true; //!
     if (!enableInheritedProps)
       return;
 
     // Hide TB 3.1's indexing priority option
     let standardItem = document.getElementById('folderIncludeInGlobalSearch');
     if (standardItem)
-      standardItem.setAttribute("hidden", "true");
+      standardItem.hidden = "true";//setAttribute("hidden", "true");
+
     // Setup UI for the "glodaDoIndex" inherited property, but only for
     //  imap or local folders (which includes rss).
     folder = window.arguments[0].folder;
@@ -83,10 +84,21 @@
     {
       rows.appendChild(row);
       // extend the ondialogaccept attribute
+      var old_folderPropsOKButton = window.folderPropsOKButton;
+    //  window.folderPropsOKButton = 
+     var new_folderPropsOKButton =  function(ev) {
+     //   let vv = window;
+        glodaquillaFolderProps.onAcceptInherit();
+        old_folderPropsOKButton(ev);
+      };
+      document.addEventListener("dialogaccept", new_folderPropsOKButton);
+   
+ /*
       let dialog = document.getElementsByTagName("dialog")[0];
-      dialog.setAttribute("ondialogaccept", "glodaquillaFolderProps.onAcceptInherit();" + 
+      dialog.setAttribute("ondialogaccept", "window.glodaquillaFolderProps.onAcceptInherit();" + 
                           dialog.getAttribute("ondialogaccept"));
-    }
+    */
+      }
   };
 
   self.onAcceptInherit = function glodaDoIndexOnAcceptInherit()
@@ -122,7 +134,7 @@
     );
 //  Cu.import("resource:///modules/gloda/gloda.js");
   var { Gloda } = 
-  ChromeUtils.import("resource:///modules/gloda/GlodaPublic.jsm");
+  ChromeUtils.import("resource:///modules/gloda/Gloda.jsm");
 
      // there is nothing to sync on TB 3.0
     if (typeof GlodaDatastore.getDefaultIndexingPriority == "undefined")
@@ -174,4 +186,4 @@
 
 })();
 
-window.addEventListener("load", function(e) { glodaquillaFolderProps.onLoad(e); }, false);
+//window.addEventListener("load", function(e) { glodaquillaFolderProps.onLoad(e); }, false);
