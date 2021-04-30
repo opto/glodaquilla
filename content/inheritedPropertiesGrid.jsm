@@ -1,6 +1,6 @@
 /*
  ***** BEGIN LICENSE BLOCK *****
- * This file is part of an application by Mesquilla.
+ * This file is part of an application by Klaus Buecher/opto, based on code by Mesquilla.
  *
  * This application is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,9 @@
  * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
+ * Developer for TB 78+: Klaus Buecher/opto.
+ * Portions created by opto are Copyright (C) 2021
+ * All Rights Reserved.
  * Contributor(s):
  *
  * ***** END LICENSE BLOCK *****
@@ -296,7 +299,7 @@ var InheritedPropertiesGrid = {
     enableHbox.setAttribute("pack", "center");
     let enableCheckbox = document.createXULElement("checkbox");
     enableCheckbox.setAttribute("id", "enable-" + property);
-    // We only use this in the account manager
+    // We only use this in the account manager  ??? true??
 //    if (aIsAccountManager)
 if (true)
       enableCheckbox.setAttribute("oncommand",

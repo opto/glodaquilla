@@ -14,4 +14,5 @@ It also adds three columns to the Thunderbird message pane that are primarily us
 
 This addon was updated from https://github.com/opto/glodaquilla with the following notes:
 
-"rkent's glodaquilla addon for Thunderbird updated for TB60. I only tested the gloda_dirty/gloda_id stuff"
+"rkent's glodaquilla addon for Thunderbird updated for TB60 and now TB78.
+

@@ -1,9 +1,7 @@
 /*
- * License:  see License.txt
- * Code until Nostalgy 0.3.0/Nostalgy 1.1.15: Zlib
- * Code additions for TB 78 or later: Creative Commons (CC BY-ND 4.0):
- *      Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0) 
- 
+ * TB 78+ (c) by Klaus Buecher/opto 2020-2021
+ * License:  MPL2
+  
  * Contributors:  see Changes.txt
  */
 
@@ -12,34 +10,12 @@
 var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 
-//var { manage_emails } = ChromeUtils.import("chrome://nostalgy/content/manage_emails.jsm");
-
 Services.scriptloader.loadSubScript("chrome://glodaquilla/content/glodaquillaOverlay.js", window, "UTF-8");
-//Services.scriptloader.loadSubScript("chrome://glodaquilla/content/am-inheritPane.js", window, "UTF-8");
 Services.scriptloader.loadSubScript("chrome://glodaquilla/content/inheritPane-service.js", window, "UTF-8");
-//Services.scriptloader.loadSubScript("chrome://FolderPaneSwitcher/content/FolderPaneSwitcher.js", window, "UTF-8");
-/*
 
-
- <script src="utils.js"/>
-  <script src="FolderPaneSwitcher.js"/>
- 
-Services.scriptloader.loadSubScript("chrome://nostalgy/content/folders.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://nostalgy/content/nostalgy_keys.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://nostalgy/content/sqlite.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://nostalgy/content/nfpredict.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://nostalgy/content/nostalgy.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://nostalgy/content/header_parser.js", window, "UTF-8");
-Services.scriptloader.loadSubScript("chrome://nostalgy/content/edit_prefs.js", window, "UTF-8");
-*/
 
 function onLoad(activatedWhileWindowOpen) {
     console.log("glodaquilla", Services.appinfo.version);
-    /*
-       let layout = WL.injectCSS("chrome://quickfolders/content/quickfolders-layout.css");
-       layout.setAttribute("title", "QuickFolderStyles");
-       
-    */
 
     WL.injectElements(`
 
@@ -65,17 +41,11 @@ function onLoad(activatedWhileWindowOpen) {
   `, ["chrome://glodaquilla/locale/glodaquilla.dtd"]);
 
     console.log("messenger-FPS");
-    //window.onNostalgyLoad();
-//    window.FolderPaneSwitcher.onLoad();
-window.glodaquilla.onLoad();
-    //manage_emails.WL = WL;
-    /*   
-    */
+ window.glodaquilla.onLoad();
 }
 
 function onUnload(isAddOnShutDown) {
     console.log("glodaquilla unload");
-    //    window.onNostalgyUnload();
     window.glodaquilla.onUnload();
         Components.classes["@mozilla.org/xre/app-info;1"].
         getService(Components.interfaces.nsIXULRuntime).invalidateCachesOnRestart();

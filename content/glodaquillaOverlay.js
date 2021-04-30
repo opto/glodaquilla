@@ -1,6 +1,6 @@
 /*
  ***** BEGIN LICENSE BLOCK *****
- * This file is part of the application GlodaQuilla by Mesquilla.
+ * This file is part of an application by Klaus Buecher/opto, based on code by Mesquilla.
  *
  * This application is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,13 +19,18 @@
  *
  * The Initial Developer of the Original Code is
  * Kent James <rkent@mesquilla.com>
- * Portions created by the Initial Developer are Copyright (C) 2009, 2010
+ * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
- * Contributor(s):  opto (Klaus))
+ * Developer for TB 78+: Klaus Buecher/opto.
+ * Portions created by opto are Copyright (C) 2021
+ * All Rights Reserved.
+ * Contributor(s):
  *
  * ***** END LICENSE BLOCK *****
  */
+
+ 
 var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
 (function glodaquilla()
@@ -38,17 +43,13 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
   const Ci = Components.interfaces;
   const Cu = Components.utils;
 
-//  Cu.import("resource:///modules/iteratorUtils.jsm");
   var { fixIterator, toXPCOMArray } = ChromeUtils.import("resource:///modules/iteratorUtils.jsm");
-//  Cu.import("resource:///modules/gloda/gloda.js");
   var { Gloda } = 
   ChromeUtils.import("resource:///modules/gloda/Gloda.jsm");
   
-//    Cu.import("resource:///modules/gloda/datastore.js");
     var { GlodaDatastore } = ChromeUtils.import(
       "resource:///modules/gloda/GlodaDatastore.jsm"
     );
- //     Cu.import("resource:///modules/gloda/datamodel.js");
       var {  GlodaAttributeDBDef,
         GlodaAccount,
         GlodaConversation,
@@ -59,15 +60,13 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
         GlodaAttachment } = ChromeUtils.import(
         "resource:///modules/gloda/GlodaDataModel.jsm"
       );
-      //  Cu.import("resource:///modules/gloda/indexer.js");
   var { GlodaIndexer } = ChromeUtils.import(
     "resource:///modules/gloda/GlodaIndexer.jsm"
   );
- // Cu.import("resource:///modules/gloda/index_msg.js");
   var { GlodaMsgIndexer } = ChromeUtils.import(
     "resource:///modules/gloda/IndexMsg.jsm"
   );
-  var {InheritedPropertiesGrid} = ChromeUtils.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
+  var { InheritedPropertiesGrid } = ChromeUtils.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
 
   // module-level variables
   //const glodaquillaStrings = Cc["@mozilla.org/intl/stringbundle;1"]
@@ -470,7 +469,7 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
           }
         }
         if (showMigration)  ;
- //! does not exist         self.openContentTab('http://mesquilla.com/extensions/glodaquilla/glodaquilla-update-for-thunderbird-3-1/');
+ //! url does not exist         self.openContentTab('http://mesquilla.com/extensions/glodaquilla/glodaquilla-update-for-thunderbird-3-1/');
         else
           // If the user has not previously used GlodaQuilla's indexing suppression, then
           //  don't enable it.
@@ -516,6 +515,3 @@ var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
   };
 
 })();
-
-window.addEventListener("load", function(e) { glodaquilla.onLoad(e); }, false);
-window.addEventListener("unload", function(e) { glodaquilla.onUnload(e); }, false);

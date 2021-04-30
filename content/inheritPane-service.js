@@ -1,6 +1,6 @@
 /*
  ***** BEGIN LICENSE BLOCK *****
- * This file is part of an application by Mesquilla.
+ * This file is part of an application by Klaus Buecher/opto, based on code by Mesquilla.
  *
  * This application is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,12 +22,14 @@
  * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
+ * Developer for TB 78+: Klaus Buecher/opto.
+ * Portions created by opto are Copyright (C) 2021
+ * All Rights Reserved.
  * Contributor(s):
  *
  * ***** END LICENSE BLOCK *****
  */
 
-//Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 var { XPCOMUtils } = ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 const catMan = Components.classes["@mozilla.org/categorymanager;1"]
@@ -76,25 +78,13 @@ let catEnum = catMan.enumerateCategory("InheritedPropertiesGrid");
   },
 
   QueryInterface: ChromeUtils.generateQI(["nsIMsgAccountManagerExtension" ]), 
- // QueryInterface: ChromeUtils.generateQI([ Components.interfaces.nsIMsgAccountManagerExtension ]), 
   
-  //XPCOMUtils.generateQI([Components.interfaces.nsIMsgAccountManagerExtension]),
   classDescription: "MesQuilla Inherit Pane Service",
   classID: Components.ID("{deb0918a-0652-4a5b-9f48-a6e713cf1803}"),
   contractID: "@mozilla.org/accountmanager/extension;1?name=inheritPane",
-  //category: {'mailnews-accountmanager-extensions': 'mesquilla extension inherit pane'},
-
-//  _xpcom_categories: [{category: "mailnews-accountmanager-extensions",
- //                      entry: "mesquilla extension inherit pane"}]
 };
 
 
-/*
-if (XPCOMUtils.generateNSGetFactory)
-  var NSGetFactory = XPCOMUtils.generateNSGetFactory([inheritPane]);
-else
-  var NSGetModule= XPCOMUtils.generateNSGetModule([inheritPane]);
-*/
 
   
 function Factory(component) {

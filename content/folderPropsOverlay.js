@@ -1,6 +1,6 @@
 /*
  ***** BEGIN LICENSE BLOCK *****
- * This file is part of the application GlodaQuilla by Mesquilla.
+ * This file is part of an application by Klaus Buecher/opto, based on code by Mesquilla.
  *
  * This application is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,9 @@
  * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
+ * Developer for TB 78+: Klaus Buecher/opto.
+ * Portions created by opto are Copyright (C) 2021
+ * All Rights Reserved.
  * Contributor(s):
  *
  * ***** END LICENSE BLOCK *****
@@ -45,7 +48,6 @@
   const Cu = Components.utils;
   
   // module-level variables
-//  Cu.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
   var { InheritedPropertiesGrid } = ChromeUtils.import("resource://glodaquilla/inheritedPropertiesGrid.jsm");
 
   let folder; // nsIMsgFolder passed to the window
@@ -93,11 +95,7 @@
       };
       document.addEventListener("dialogaccept", new_folderPropsOKButton);
    
- /*
-      let dialog = document.getElementsByTagName("dialog")[0];
-      dialog.setAttribute("ondialogaccept", "window.glodaquillaFolderProps.onAcceptInherit();" + 
-                          dialog.getAttribute("ondialogaccept"));
-    */
+ 
       }
   };
 
@@ -117,11 +115,9 @@
     if (glodaDoIndex == oldValue)
       return;
 
-//    Cu.import("resource:///modules/gloda/datastore.js");
     var { GlodaDatastore } = ChromeUtils.import(
       "resource:///modules/gloda/GlodaDatastore.jsm"
     );
-//     Cu.import("resource:///modules/gloda/datamodel.js");
      var {  GlodaAttributeDBDef,
       GlodaAccount,
       GlodaConversation,
@@ -132,7 +128,6 @@
       GlodaAttachment } = ChromeUtils.import(
       "resource:///modules/gloda/GlodaDataModel.jsm"
     );
-//  Cu.import("resource:///modules/gloda/gloda.js");
   var { Gloda } = 
   ChromeUtils.import("resource:///modules/gloda/Gloda.jsm");
 
@@ -186,4 +181,3 @@
 
 })();
 
-//window.addEventListener("load", function(e) { glodaquillaFolderProps.onLoad(e); }, false);

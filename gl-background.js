@@ -1,13 +1,22 @@
 /*
- * License:  see License.txt
- * Code until Nostalgy 0.3.0/Nostalgy 1.1.15: Zlib
- * Code additions for TB 78 or later: Creative Commons (CC BY-ND 4.0):
- *      Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0) 
- 
+ * TB 78+ (c) by Klaus Buecher/opto 2020-2021
+ * License:  MPL2
+  
  * Contributors:  see Changes.txt
  */
 
 
+/*
+
+TODO
+x license blocks
+x  popup installed, 
+x  popup updated
+options page
+x  donation id
+layout accountmanager overlay
+wofür service?
+*/
 
 /*
  * Documentation:
@@ -17,7 +26,7 @@
 var lastTab = 0, lastWindow = 0;
 
 
-/*
+
 messenger.runtime.onInstalled.addListener(async ({ reason, temporary }) => {
  // if (temporary) return; // skip during development
   switch (reason) {
@@ -39,17 +48,8 @@ messenger.runtime.onInstalled.addListener(async ({ reason, temporary }) => {
       // see below
   }
 });
-*/
-/*
-messenger.tabs.onActivated.addListener(async (activeInfo) => {
-  //console.log("tab activated "+ activeInfo.tabId + " window: " + activeInfo.windowId);
-  lastTab = activeInfo.tabId;
-  lastWindow = activeInfo.windowId;
-  let tabInfo = await messenger.tabs.get( activeInfo.tabId);
-  messenger.Utilities.isMailTab(tabInfo.mailTab);
-});
+/**/
 
-*/
 
 async function main() {
 messenger.WindowListener.registerDefaultPrefs("defaults/preferences/glodaquilla.js");
@@ -60,57 +60,15 @@ messenger.WindowListener.registerDefaultPrefs("defaults/preferences/glodaquilla.
     ["locale", "glodaquilla", "en-US", "locale/en-US/"],
     ["locale", "glodaquilla", "de", "locale/de/"],
           ["resource", "glodaquilla", "content/"]
-    //      ["locale", "nostalgy", "de", "chrome/locale/de/"],
-    /*      ["locale", "quickfolders", "es-MX", "chrome/locale/es-MX/"],
-          ["locale", "quickfolders", "es", "chrome/locale/es/"],
-          ["locale", "quickfolders", "fr", "chrome/locale/fr/"],
-          ["locale", "quickfolders", "hu-HU", "chrome/locale/hu-HU/"],
-          ["locale", "quickfolders", "it", "chrome/locale/it/"],
-          ["locale", "quickfolders", "ja-JP", "chrome/locale/ja-JP/"],
-          ["locale", "quickfolders", "nl", "chrome/locale/nl/"],
-          ["locale", "quickfolders", "pl", "chrome/locale/pl/"],
-          ["locale", "quickfolders", "pt-BR", "chrome/locale/pt-BR/"],
-          ["locale", "quickfolders", "ru", "chrome/locale/ru/"],
-          ["locale", "quickfolders", "sl-SI", "chrome/locale/sl-SI/"],
-          ["locale", "quickfolders", "sr", "chrome/locale/sr/"],
-          ["locale", "quickfolders", "sv-SE", "chrome/locale/sv-SE/"],
-          ["locale", "quickfolders", "vi", "chrome/locale/vi/"],
-          ["locale", "quickfolders", "zh-CN", "chrome/locale/zh-CN/"],
-          ["locale", "quickfolders", "zh-CHS", "chrome/locale/zh-CN/"],
-          ["locale", "quickfolders", "zh", "chrome/locale/zh/"],
-          ["locale", "quickfolders", "zh-CHT", "chrome/locale/zh/"],
-          ["locale", "quickfolders", "zh-TW", "chrome/locale/zh/"]
-      */
-  ]);
+ ]);
 
 
  // messenger.WindowListener.registerOptionsPage("chrome://FolderPaneSwitcher/content/options.xhtml");
   messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "content/scripts/gl-messenger.js");
 
-  //attention: each target window (like messenger.xul) can appear only once
-  // this is different from chrome.manifest
-  // xhtml for Tb78
-   messenger.WindowListener.registerWindow("chrome://messenger/content/folderProps.xhtml", "content/scripts/gl-folderprops.js");
+    messenger.WindowListener.registerWindow("chrome://messenger/content/folderProps.xhtml", "content/scripts/gl-folderprops.js");
 
-  //   messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xul", "chrome/content/scripts/me-messenger.js");
- // messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "chrome/content/scripts/fp-messenger.js");
-
-  //messenger.WindowListener.registerWindow("chrome://messenger/content/messengercompose.xul", "chrome/content/scripts/qf-composer.js");
-  //    messenger.WindowListener.registerWindow("chrome://messenger/content/messengercompose/messengercompose.xhtml", "chrome/content/scripts/me-composer.js");
-  /*
-      messenger.WindowListener.registerWindow("chrome://messenger/content/FilterListDialog.xul", "chrome/content/scripts/qf-filterlist.js");
-      messenger.WindowListener.registerWindow("chrome://messenger/content/FilterListDialog.xhtml", "chrome/content/scripts/qf-filterlist.js");
-   
-      messenger.WindowListener.registerWindow("chrome://messenger/content/SearchDialog.xul", "chrome/content/scripts/qf-searchDialog.js");
-      messenger.WindowListener.registerWindow("chrome://messenger/content/SearchDialog.xhtml", "chrome/content/scripts/qf-searchDialog.js");
-  
-      messenger.WindowListener.registerWindow("chrome://messenger/content/customizeToolbar.xul", "chrome/content/scripts/qf-customizetoolbar.js");
-      messenger.WindowListener.registerWindow("chrome://messenger/content/customizeToolbar.xhtml", "chrome/content/scripts/qf-customizetoolbar.js");
-  */
-  //   messenger.WindowListener.registerWindow("chrome://messenger/content/messageWindow.xul", "chrome/content/scripts/me-messageWindow.js");
-  //   messenger.WindowListener.registerWindow("chrome://messenger/content/messageWindow.xhtml", "chrome/content/scripts/me-messageWindow.js");
-  //  messenger.WindowListener.registerWindow("chrome://messenger/content/messageWindow.xhtml", "chrome/content/scripts/me-messenger.js");
-
+ 
   /* 
    
      messenger.WindowListener.registerStartupScript("chrome/content/scripts/qf-startup.js");
