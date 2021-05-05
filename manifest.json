@@ -1,5 +1,5 @@
 {
-	"name": "Glodaquilla-NG",
+	"name": "Glodaquilla-NG: Search/Indexing, on Disk Status",
   "description": "Glodaquilla-NG: Global Search/Indexing Enhancements/ On Disk Status for IMAP",
 	"version": "1.1",
 	"author": "opto",
@@ -13,6 +13,8 @@
         "48": "icon.png"
     },
     "manifest_version": 2,
+
+	"content_security_policy": "script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'self';",
 
 
     "experiment_apis": {

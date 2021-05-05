@@ -11,9 +11,12 @@
 TODO
 x license blocks
 x  popup installed, 
-x  popup updated
+x  popup 
+popup breite install popup
+x   kent bugzilla link??
 options page
 x  donation id
+account settings instant save
 layout accountmanager overlay
 wofür service?
 */
@@ -29,20 +32,21 @@ var lastTab = 0, lastWindow = 0;
 
 messenger.runtime.onInstalled.addListener(async ({ reason, temporary }) => {
  // if (temporary) return; // skip during development
-  switch (reason) {
+const url = messenger.runtime.getURL("ckeditor/samples/index.html");
+ switch (reason) {
     case "install":
       {
-        const url = messenger.runtime.getURL("popup/installed.html");
+ //       const url = messenger.runtime.getURL("ckeditor\samplesindex.html");
 //        const url = messenger.runtime.getURL("popup/about_content.html");
         //await browser.tabs.create({ url });
-        await messenger.windows.create({ url, type: "popup", height: 780, width: 990, });
+        await messenger.windows.create({ url, type: "popup", height: 780, width: 1190, });
       }
       break;
       case "update":
         {
-          const url = messenger.runtime.getURL("popup/update.html");
+ //          const url = messenger.runtime.getURL("popup/edit.html");
           //await browser.tabs.create({ url });
-          await messenger.windows.create({ url, type: "popup", height: 780, width: 990, });
+          await messenger.windows.create({ url, type: "popup", height: 780, width: 1190, });
         }
         break;
       // see below
@@ -52,7 +56,7 @@ messenger.runtime.onInstalled.addListener(async ({ reason, temporary }) => {
 
 
 async function main() {
-messenger.WindowListener.registerDefaultPrefs("defaults/preferences/glodaquilla.js");
+//messenger.WindowListener.registerDefaultPrefs("defaults/preferences/glodaquilla.js");
 
 
   messenger.WindowListener.registerChromeUrl([
@@ -64,9 +68,9 @@ messenger.WindowListener.registerDefaultPrefs("defaults/preferences/glodaquilla.
 
 
  // messenger.WindowListener.registerOptionsPage("chrome://FolderPaneSwitcher/content/options.xhtml");
-  messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "content/scripts/gl-messenger.js");
+ // messenger.WindowListener.registerWindow("chrome://messenger/content/messenger.xhtml", "content/scripts/gl-messenger.js");
 
-    messenger.WindowListener.registerWindow("chrome://messenger/content/folderProps.xhtml", "content/scripts/gl-folderprops.js");
+ //   messenger.WindowListener.registerWindow("chrome://messenger/content/folderProps.xhtml", "content/scripts/gl-folderprops.js");
 
  
   /* 

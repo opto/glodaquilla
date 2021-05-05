@@ -28,4 +28,6 @@ addEventListener("load", async (event) => {
 	let browserInfo = await browser.runtime.getBrowserInfo()
 	htmltext = htmltext2.replace(/{appver}/g, browserInfo.version);
 	document.body.innerHTML = htmltext;
+	CKEDITOR.replace( 'editor1' );
+
 });
