@@ -1,5 +1,5 @@
 # glodaquilla
-rkent's glodaquilla addon for Thunderbird updated for TB60
+rkent's glodaquilla addon for Thunderbird updated for TB60 and now TB78
 
 
 
